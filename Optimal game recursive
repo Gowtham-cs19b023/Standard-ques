@@ -1,0 +1,31 @@
+class Solution{   
+public:
+    int check(int arr[],int n,int s,int e){
+        if(s==e){
+            return arr[s];
+        }
+        int a = arr[s]+min(check(arr,n-2,s+2,e),check(arr,n-2,s+1,e-1));
+        int b = arr[e]+min(check(arr,n-2,s,e-2),check(arr,n-2,s+1,e-1));
+        
+        return max(a,b);
+    }
+    bool is1winner(int N,int arr[]) {
+        
+        // code here
+        if(N==1||N==2){
+            return true;
+        }
+        if(N%2==0){
+            return true;
+        }
+        int sum = 0;
+        for(int i=0;i<N;i++){
+            sum+=arr[i];
+        }
+        int ans = check(arr,N,0,N-1);
+        ans = ans*2;
+        
+        return (ans>=sum);
+        
+    }
+};
